@@ -3,7 +3,6 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const app = express();
-const port = process.env.PORT || 3001;
 const getPhoto = require('./db.js').getPhoto;
 var bodyParser = require('body-parser');
 
@@ -22,9 +21,8 @@ app.get('/photos', function (req, res) {
   });
 });
 
-app.listen(port, () => {
-  console.log(`server running at: http://localhost:${port}`);
-});
 
 
 
+
+module.exports = app

@@ -27,7 +27,9 @@
     "axios": "^0.18.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
     "jest": "^23.4.1",
+    "jest-each": "^23.4.0",
     "nodemon": "^1.18.3",
+    "supertest": "^3.1.0",
     "webpack-cli": "^3.1.0"
   },
   "version": "1.0.0",
