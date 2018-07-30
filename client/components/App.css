@@ -1,0 +1,82 @@
+
+body, html {
+    height: 100%;
+}
+
+.container { 
+    /* Full height */ 
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.responsive {
+    width:100%;
+    height: 100%;
+}
+
+
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 440px;
+    cursor: pointer;
+}
+
+
+.container .btn {
+    position: absolute;
+    top: 10%;
+    left: 78%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: white;
+    color: rgb(27, 27, 27);
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.container .btns {
+    position: absolute;
+    top: 10%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: white;
+    color: rgb(27, 27, 27);
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.container .viewphotos {
+    position: absolute;
+    top: 90%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: white;
+    color: rgb(27, 27, 27);
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.container .btn:hover {
+    background-color: grey;
+}
+
+.heart:hover {
+    background-color: red;
+}
+  

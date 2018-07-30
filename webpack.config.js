@@ -15,6 +15,11 @@ module.exports = {
           presets: ['react', 'es2015', 'env']
         },
       },
+      {
+        test: /\.css/,
+        loaders: ['style-loader', 'css-loader'],
+        include: __dirname + '/client'
+      }
     ],
   },
   output: {
