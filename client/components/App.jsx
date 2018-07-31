@@ -18,12 +18,39 @@ class App extends Component {
           counter: 0,
           photos:[],
           isOpen: false,
-          showModal: false
+          showModal: false,
+          count: 0,
         }
         this.getPhotos = this.getPhotos.bind(this);
         this.showCarousel = this.showCarousel.bind(this);
         this.toggleModal = this.toggleModal.bind(this);
+        this.incrementCount = this.incrementCount.bind(this);
+        this.decrementCount = this.decrementCount.bind(this);
+
     }
+    incrementCount () {
+        if (this.state.count=== 3) {
+    
+          this.setState({ 
+            count: 0
+           })
+        } else {
+        this.setState({ count: this.state.count + 1 })
+        }
+      }
+    
+    decrementCount () {
+        if(this.state.count === 0){
+          this.setState({
+            count: 3,
+          })
+        } else {
+          this.setState({
+            count: this.state.count - 1,
+          })
+        }
+    }
+
     componentDidMount(){
       this.getPhotos();
     }
@@ -41,7 +68,7 @@ class App extends Component {
         .then( (response) => {
             that.setState({
                 photos: response.data,
-                counter: 1
+                counter: 1,
             }, () => console.log( that.state.photos))
             
         });
@@ -67,8 +94,17 @@ class App extends Component {
                   <Modal show={this.state.isOpen}
                          onClose={this.toggleModal}
                          onCloseRequest={() => this.toggleModal()}
+                         count= {this.state.count}
+                         increment= {this.incrementCount}
+                         decrement= {this.decrementCount}
                   >
-                    <CarouselPage photos={this.state.photos} />
+                    <CarouselPage 
+                    photos={this.state.photos}
+                    count= {this.state.count}
+                    incrementCount= {this.incrementCount}
+                    decrementCount= {this.decrementCount}
+
+                     />
                   </Modal>
                 </div>
             </div>

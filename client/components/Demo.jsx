@@ -18,10 +18,12 @@ class Carousel extends Component {
     ArrowKeysReact.config({
       left: () => {
         this.prevSlide();
+        this.props.decrement();
         console.log('left key detected.');
       },
       right: () => {
         this.nextSlide();
+        this.props.increment();
         console.log('right key detected.');
       }
     });
