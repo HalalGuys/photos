@@ -1,36 +1,81 @@
-
 import React, { Component } from 'react';
-import styled from 'styled-components';
-import Carousel from './Demo.jsx';
-import CarouselSlot from './CarouselSlot.jsx';
-import styles from './Carousel.css';
+import PropTypes from 'prop-types';
+import CarouselContainer from './CarouselContainer.jsx'
+import Wrapper from './Wrapper.jsx'
+import CarouselSlot from './CarouselSlot.jsx'
+import ArrowKeysReact from 'arrow-keys-react';
 
-const Item = styled.div`
-  text-align: center;
-  padding: 0px;
-  color: white;
-  width: 100px;
-  height: 67px;
-  cursor: pointer;
-  vertical-align: middle;
-  background-color: transparent;
-`
+class Carousel extends Component {
 
-// const Main = styled.main`
-//   padding: 0px;
-//   color: white;
-//   width: 654px;
-//   height: 438px;
-//   cursor: pointer;
-//   vertical-align: middle;
-//   background-color: transparent;
-// `
-
-class CarouselPage extends Component {
   constructor(props){
-    super(props);
+    super(props)
+    this.state = {
+      position: 0,
+      direction: 'next',
+      sliding: false
+
+    };
+    ArrowKeysReact.config({
+      left: () => {
+        this.prevSlide();
+        this.props.decrement();
+        console.log('left key detected.');
+      },
+      right: () => {
+        this.nextSlide();
+        this.props.increment();
+        console.log('right key detected.');
+      }
+    });
+    this.nextSlide = this.nextSlide.bind(this);
+    this.getOrder = this.getOrder.bind(this);
+    this.doSliding = this.doSliding.bind(this);
+    this.prevSlide = this.prevSlide.bind(this);
+  }
+
+
+  getOrder(itemIndex) {
+    const { position } = this.state
+    const { children } = this.props
+    const numItems = children.length || 1
+    if (itemIndex - position < 0) {
+      return numItems - Math.abs(itemIndex - position)
+    }
+    return itemIndex - position
+  }
+
+  nextSlide (){
+    console.log('nextslide invoked')
+    const { position } = this.state;
+    const { children } = this.props;
+    const numItems = children.length || 1;
+  
+    this.doSliding('next', position === numItems - 1 ? 0 : position + 1)
     
   }
+
+  prevSlide(){
+    const { position } = this.state
+    const { children } = this.props
+    const numItems = children.length
+    this.doSliding('prev', position === 0 ? numItems - 1 : position - 1)
+  }
+
+  doSliding (direction, position) {
+    const { sliding } = this.state;
+    console.log('dosliding is invoked')
+    this.setState({
+      sliding: true,
+      direction,
+      position
+    })
+    setTimeout(() => {
+     this.setState({
+        sliding: false
+      })
+    }, 50)
+  }
+
 
 
 
@@ -38,29 +83,53 @@ class CarouselPage extends Component {
 
 
   render() {
+    const { title, children } = this.props
     return (
-      <div className="wrapper" >
-        <div> 
-        
-        { this.props.count === 0 && <img id="Main" src={this.props.photos[0].kitchen.kitchen_url}  /> }
-        { this.props.count === 1 && <img id="Main" src={this.props.photos[0].dining.dining_url}  /> }
-        { this.props.count === 2 && <img id="Main" src={this.props.photos[0].bathroom.bathroom_url}  /> }
-        { this.props.count === 3 && <img id="Main" src={this.props.photos[0].bedroom.bedroom_url}  /> }
-         
-         </div>
-        <Carousel
-          title="Carousel"
-          decrement = {this.props.decrementCount}
-          increment={this.props.incrementCount}
-        >
-          <Item class="fixed"><img class="fixed" src={this.props.photos[0].kitchen.kitchen_url} /></Item>
-          <Item class="fixed"><img class="fixed" src={this.props.photos[0].dining.dining_url} /></Item>
-          <Item class="fixed"><img class="fixed" src={this.props.photos[0].bathroom.bathroom_url} /></Item>
-          <Item class="fixed"><img class="fixed" src={this.props.photos[0].bedroom.bedroom_url} /></Item>
-        </Carousel>
-      </div>
-    );
+      <div>
+        <h2>{ title }</h2>
+
+            <Wrapper>
+              <CarouselContainer sliding = {this.state.sliding} direction= {this.state.direction} >
+                { children.map((child, index) => (
+                  <CarouselSlot
+                    key={ index }
+                    order={ this.getOrder(index) }
+                  >
+                  
+                    {child}
+                  </CarouselSlot>
+                )) }
+              </CarouselContainer>
+                <div {...ArrowKeysReact.events} tabIndex="1">
+                </div>
+            </Wrapper>
+            <button onClick={ 
+              () => {
+                this.prevSlide() 
+                this.props.decrement()
+              }
+            }>
+              Prev
+            </button>
+            <button 
+            class = "check"
+            onClick={ 
+              () => {
+                this.nextSlide() 
+                this.props.increment() 
+              }
+            }>
+              Next
+            </button>
+    </div>
+  )
   }
 }
 
-export default CarouselPage; 
+Carousel.propTypes = {
+  title: PropTypes.string,
+  children: PropTypes.node
+};
+
+
+export default Carousel;

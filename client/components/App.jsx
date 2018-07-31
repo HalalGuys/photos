@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import styles from './App.css'
 import axios from 'axios';
-import CarouselPage from './Carousel.jsx'
+import CarouselPage from './CarouselPage.jsx'
 import Modal from './Modal.jsx'
 
 
@@ -20,6 +20,10 @@ class App extends Component {
           isOpen: false,
           showModal: false,
           count: 0,
+          position: 0,
+         direction: 'next',
+         sliding: false
+
         }
         this.getPhotos = this.getPhotos.bind(this);
         this.showCarousel = this.showCarousel.bind(this);
@@ -28,6 +32,38 @@ class App extends Component {
         this.decrementCount = this.decrementCount.bind(this);
 
     }
+    nextSlide (){
+        console.log('nextslide invoked')
+        const { position } = this.state;
+        const { children } = this.props;
+        const numItems = children.length || 1;
+      
+        this.doSliding('next', position === numItems - 1 ? 0 : position + 1)
+        
+      }
+    
+      prevSlide(){
+        const { position } = this.state
+        const { children } = this.props
+        const numItems = children.length
+        this.doSliding('prev', position === 0 ? numItems - 1 : position - 1)
+      }
+    
+      doSliding (direction, position) {
+        const { sliding } = this.state;
+        console.log('dosliding is invoked')
+        this.setState({
+          sliding: true,
+          direction,
+          position
+        })
+        setTimeout(() => {
+         this.setState({
+            sliding: false
+          })
+        }, 50)
+      }
+      
     incrementCount () {
         if (this.state.count=== 3) {
     
@@ -84,12 +120,9 @@ class App extends Component {
         return (
             <div >
                 <h1> Photos </h1>
-                { this.state.counter === 1 &&  <div class="container" onClick={this.showCarousel}><button class="btn"><i class="far fa-share-square"></i> Share </button><button class="btns"> <i class="heart far fa-heart"></i> Save</button><button class="viewphotos">View Photos</button><img class="responsive" src={this.state.photos[0].dining.dining_url} /> </div> }
+                { this.state.counter === 1 &&  <div class="container" onClick={this.toggleModal}><button class="btn"><i class="far fa-share-square"></i> Share </button><button class="btns"> <i class="heart far fa-heart"></i> Save</button><button onClick={this.toggleModal} class="viewphotos">View Photos</button><img class="responsive" src={this.state.photos[0].dining.dining_url} /> </div> }
                 { this.state.counter === 2 && <CarouselPage photos={this.state.photos} />}
                 <div className="App">
-                  <button onClick={this.toggleModal}>
-                  Open the modal
-                  </button>
 
                   <Modal show={this.state.isOpen}
                          onClose={this.toggleModal}
