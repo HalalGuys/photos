@@ -46,7 +46,8 @@ class Carousel extends Component {
     console.log('nextslide invoked')
     const { position } = this.state;
     const { children } = this.props;
-    const numItems = children.length || 1
+    const numItems = children.length || 1;
+  
     this.doSliding('next', position === numItems - 1 ? 0 : position + 1)
     
   }
@@ -94,15 +95,28 @@ class Carousel extends Component {
                   >
                   
                     {child}
-                    Photo{this.state.position + '/' + 4}
                   </CarouselSlot>
                 )) }
               </CarouselContainer>
                 <div {...ArrowKeysReact.events} tabIndex="1">
                 </div>
             </Wrapper>
-            <button onClick={ () => this.prevSlide() }>Prev</button>
-            <button onClick={ () => this.nextSlide() }>Next</button>
+            <button onClick={ 
+              () => {
+                this.prevSlide() 
+                this.props.decrement()
+              }
+            }>
+              Prev
+            </button>
+            <button onClick={ 
+              () => {
+                this.nextSlide() 
+                this.props.increment() 
+              }
+            }>
+              Next
+            </button>
     </div>
   )
   }

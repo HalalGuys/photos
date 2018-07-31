@@ -5,8 +5,8 @@ const CarouselContainer = styled.div`
   margin: 0 0 20px 20px;
   transition: ${(props) => props.sliding ? 'none' : 'transform 1s ease'};
   transform: ${(props) => {
-    if (!props.sliding) return 'translateX(calc(-80% - 20px))'
-    if (props.direction === 'prev') return 'translateX(calc(2 * (-80% - 20px)))'
+    if (!props.sliding) return 'translateX(calc(0%))'
+    if (props.direction === 'prev') return 'translateX(calc(2 * (0% )))'
     return 'translateX(0%)'
   }};
 `

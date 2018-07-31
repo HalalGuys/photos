@@ -1,0 +1,43 @@
+  
+.closeButton {
+  color: white;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: transparent;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  outline: 0;
+}
+ 
+
+.rightChevron {
+  color: white;
+  position: fixed;
+  top: 40%;
+  right: 0 !important;
+  background-color: transparent;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  outline: 0;
+}
+
+.leftChevron {
+  color: white;
+  position: fixed;
+  top: 40%;
+  left: 0 !important;
+  background-color: transparent;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  outline: 0;
+}
