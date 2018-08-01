@@ -32,6 +32,7 @@ class App extends Component {
         this.decrementCount = this.decrementCount.bind(this);
 
     }
+    
     nextSlide (){
         console.log('nextslide invoked')
         const { position } = this.state;
@@ -100,8 +101,11 @@ class App extends Component {
     
     getPhotos() {
         var that = this;
-        axios.get('/photos')
+        const getListingIdFromUrl = () => parseInt(window.location.pathname.split('listing/')[1], 10) || 0;
+        var index = getListingIdFromUrl();
+        axios.get(`/api/listing/${index}`)
         .then( (response) => {
+            console.log('got a response',response.data)
             that.setState({
                 photos: response.data,
                 counter: 1,

@@ -30,10 +30,12 @@ Property.insertMany( storage, function (error,res){
       console.log('Inserted Photos')
   });
 
-let getPhoto = (callback) => {  
+let getPhoto = (callback, id) => {  
+    var query = {};
+    query['property_id'] = id;
 
     Property.
-    find({ property_id: 1 }).
+    find(query).
     exec(callback)
    
    

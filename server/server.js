@@ -8,21 +8,22 @@ var bodyParser = require('body-parser');
 
 
 app.use(morgan('dev'));
-app.use(express.static(path.join(__dirname, '../public')));
 app.use(bodyParser.json())
 
-app.get('/photos', function (req, res) {
+app.get(`/api/listing/:listingId`, function (req, res) {
   console.log('get called')
-	getPhoto((err, data) => {
+  console.log('listing id', req.params.listingId)
+	getPhoto(((err, data) => {
+    if(err){
+      console.log(err);
+      return;
+    }
     console.log('we are getting the new data')
     
-    res.send(JSON.stringify(data));
+    res.send((data));
   
-  });
+  }), req.params.listingId);
 });
 
-
-
-
-
+app.use('/listing/:listingId',express.static(`${__dirname}/../public`));
 module.exports = app
