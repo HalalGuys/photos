@@ -5,40 +5,41 @@ import ArrowKeysReact from 'arrow-keys-react';
 
 
 class Modal extends React.Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
+    this.handleKeyUp = this.handleKeyUp.bind(this);
+  }
 
-        this.handleKeyUp = this.handleKeyUp.bind(this);
-    }
 
-    componentWillUnmount() {
+  componentDidMount() {
+    window.addEventListener('keyup', this.handleKeyUp, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.handleKeyUp, false);
+  }
+  // Handle the key press event.
+
+  handleKeyUp(e) {
+    const { onCloseRequest } = this.props;
+    const keys = {
+      27: () => {
+        e.preventDefault();
+        onCloseRequest();
         window.removeEventListener('keyup', this.handleKeyUp, false);
-      }
+      },
+    };
 
-    componentDidMount() {
-      window.addEventListener('keyup', this.handleKeyUp, false);
-    }
-      
-      // Handle the key press event.
-      handleKeyUp(e) {
-        const { onCloseRequest } = this.props;
-        const keys = {
-          27: () => {
-            e.preventDefault();
-            onCloseRequest();
-            window.removeEventListener('keyup', this.handleKeyUp, false);
-          },
-        };
-    
-        if (keys[e.keyCode]) { keys[e.keyCode](); }
-      }
+    if (keys[e.keyCode]) { keys[e.keyCode](); }
+  }
+
   render() {
     // Render nothing if the "show" prop is false
     const {
-        onCloseRequest
-      } = this.props;
+      onCloseRequest,
+    } = this.props;
 
-    if(!this.props.show) {
+    if (!this.props.show) {
       return null;
     }
     // The gray background
@@ -49,7 +50,7 @@ class Modal extends React.Component {
       left: 0,
       right: 0,
       backgroundColor: 'rgba(0,0,0,0.8)',
-      padding: 50
+      padding: 50,
     };
 
     // The modal "window"
@@ -59,23 +60,25 @@ class Modal extends React.Component {
       maxWidth: 654,
       maxHeight: 438,
       margin: '0 auto',
-      padding: 30
+      padding: 30,
     };
 
     return (
       <div {...ArrowKeysReact.events} tabIndex="1" className="backdrop" style={backdropStyle}>
         <div>
           <button
-          onClick ={this.props.increment} 
-          class="rightChevron"
+            type="button"
+            onClick ={this.props.increment} 
+            className="rightChevron"
           >
-            <i class="fas fa-chevron-right fa-6x"></i>
+            <i className="fas fa-chevron-right fa-6x" />
           </button>
-          <button 
-          class="leftChevron"
-          onClick = {this.props.decrement}
+          <button
+            type="button"
+            className="leftChevron"
+            onClick={this.props.decrement}
           >
-            <i class="fas fa-chevron-left fa-6x"></i>
+            <i className="fas fa-chevron-left fa-6x" />
           </button>
         </div>
         <div className="modal" style={modalStyle}>
@@ -84,14 +87,12 @@ class Modal extends React.Component {
           <div className="footer">
 
             <button
-                type="button"
-                class="closeButton"
-                onClick={onCloseRequest}
+              type="button"
+              className="closeButton"
+              onClick={onCloseRequest}
             >
-                <i class="fas fa-times fa-3x"></i>
+              <i className="fas fa-times fa-3x" />
             </button>
-
-
 
           </div>
         </div>

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CarouselContainer from './CarouselContainer.jsx'
-import Wrapper from './Wrapper.jsx'
-import CarouselSlot from './CarouselSlot.jsx'
 import ArrowKeysReact from 'arrow-keys-react';
+import CarouselContainer from './CarouselContainer';
+import Wrapper from './Wrapper';
+import CarouselSlot from './CarouselSlot';
+
 
 class Carousel extends Component {
-
-  constructor(props){
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       position: 0,
       direction: 'next',
-      sliding: false
+      sliding: false,
 
     };
     ArrowKeysReact.config({
@@ -35,94 +35,94 @@ class Carousel extends Component {
 
 
   getOrder(itemIndex) {
-    const { position } = this.state
-    const { children } = this.props
-    const numItems = children.length || 1
-    if (itemIndex - position < 0) {
-      return numItems - Math.abs(itemIndex - position)
-    }
-    return itemIndex - position
-  }
-
-  nextSlide (){
-    console.log('nextslide invoked')
     const { position } = this.state;
     const { children } = this.props;
     const numItems = children.length || 1;
-  
-    this.doSliding('next', position === numItems - 1 ? 0 : position + 1)
-    
+    if (itemIndex - position < 0) {
+      return numItems - Math.abs(itemIndex - position);
+    }
+    return itemIndex - position;
   }
 
-  prevSlide(){
-    const { position } = this.state
-    const { children } = this.props
-    const numItems = children.length
+  nextSlide() {
+    console.log('nextslide invoked');
+    const { position } = this.state;
+    const { children } = this.props;
+    const numItems = children.length || 1;
+    this.doSliding('next', position === numItems - 1 ? 0 : position + 1);
+  }
+
+  prevSlide() {
+    const { position } = this.state;
+    const { children } = this.props;
+    const numItems = children.length;
     this.doSliding('prev', position === 0 ? numItems - 1 : position - 1)
   }
 
-  doSliding (direction, position) {
+  doSliding(direction, position) {
     const { sliding } = this.state;
-    console.log('dosliding is invoked')
+    console.log('dosliding is invoked');
     this.setState({
       sliding: true,
       direction,
-      position
-    })
+      position,
+    });
     setTimeout(() => {
-     this.setState({
-        sliding: false
-      })
-    }, 50)
+      this.setState({
+        sliding: false,
+      });
+    }, 50);
   }
 
-
-
-
-
-
-
   render() {
-    const { title, children } = this.props
+    const { title, children } = this.props;
     return (
       <div>
-        <h2>{ title }</h2>
+        <h2>
+          { title }
+        </h2>
+        <Wrapper>
+          <CarouselContainer
+            sliding={this.state.sliding} 
+            direction={this.state.direction}
+          >
+            { children.map((child, index) => (
+              <CarouselSlot
+                key={index}
+                order={this.getOrder(index)}
+              >
+                {child}
+              </CarouselSlot>
+            ))}
+          </CarouselContainer>
+          <div {...ArrowKeysReact.events} tabIndex="1" />
+        </Wrapper>
+        <button
+          type="button"
+          onClick={
+              () => {
+                this.prevSlide();
+                this.props.decrement();
+              }
+          }
+        >
+          Prev
+        </button>
 
-            <Wrapper>
-              <CarouselContainer sliding = {this.state.sliding} direction= {this.state.direction} >
-                { children.map((child, index) => (
-                  <CarouselSlot
-                    key={ index }
-                    order={ this.getOrder(index) }
-                  >
-                  
-                    {child}
-                  </CarouselSlot>
-                )) }
-              </CarouselContainer>
-                <div {...ArrowKeysReact.events} tabIndex="1">
-                </div>
-            </Wrapper>
-            <button onClick={ 
+        <button
+          type="button"
+          className="check"
+          onClick={
               () => {
-                this.prevSlide() 
-                this.props.decrement()
+                this.nextSlide();
+                this.props.increment();
               }
-            }>
-              Prev
-            </button>
-            <button 
-            class = "check"
-            onClick={ 
-              () => {
-                this.nextSlide() 
-                this.props.increment() 
-              }
-            }>
+          }
+        >
               Next
-            </button>
-    </div>
-  )
+        </button>
+      </div>
+    );
   }
 }
 
