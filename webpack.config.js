@@ -4,7 +4,7 @@ const path = require('path');
 
 module.exports = {
   context: __dirname + '/client',
-  entry: './components/App.jsx',
+  entry: './index.jsx',
   module: {
     rules: [
       {

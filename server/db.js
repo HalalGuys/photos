@@ -1,8 +1,8 @@
 
-let mongoose = require('mongoose');
-const storage = require('./datageneration.js').storage
+const mongoose = require('mongoose');
 
 mongoose.connect('mongodb://localhost/fecphotos');
+
 
 let PropertySchema = mongoose.Schema({
   property_id: Number,
@@ -24,21 +24,5 @@ let PropertySchema = mongoose.Schema({
   },
 });
 
-let Property = mongoose.model('Property',PropertySchema);
-
-Property.insertMany(storage, function (error,res){
-  if (error) throw error;
-  console.log('Inserted Photos')
-});
-
-let getPhoto = (callback, id) => {
-  let query = {};
-  query['property_id'] = id;
-
-  Property.
-    find(query).
-    exec(callback);
-
-};
-
-module.exports= { getPhoto };
+const Property = mongoose.model('Property', PropertySchema);
+module.exports = { Property };

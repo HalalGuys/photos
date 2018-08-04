@@ -112,14 +112,19 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>
-          Photos
-        </h1>
-        { this.state.counter === 1 &&  <div className="container" onClick={this.toggleModal}><button class="btn"><i class="far fa-share-square"></i> Share </button><button class="btns"> <i class="heart far fa-heart"></i> Save</button><button onClick={this.toggleModal} class="viewphotos">View Photos</button><img class="responsive" src={this.state.photos[0].dining.dining_url} /> </div> }
+      <div class="photomargin">
+        { this.state.counter === 1
+        &&  <div className="container" onClick={this.toggleModal}>
+            <button class="btn desktopbutton"><i class="far fa-share-square"></i> Share </button>
+            <button class="btns desktopbutton"> <i class="heart far fa-heart"></i> Save</button>
+            <button class="btns mobilebutton"> <i class="heart far fa-heart fa-2x"></i> </button>
+            <button class="btn mobilebutton"><i class="far fa-share-square fa-2x"></i></button>
+            <button onClick={this.toggleModal} class="viewphotos right">View Photos</button>
+          <img class="responsive" src={this.state.photos[0].dining.dining_url} />
+        </div> }
         { this.state.counter === 2 && <CarouselPage photos={this.state.photos} />}
         <div className="App">
-          <Modal
+          <Modal 
             show={this.state.isOpen}
             onClose={this.toggleModal}
             onCloseRequest={() => this.toggleModal()}
@@ -141,5 +146,3 @@ class App extends Component {
 }
 
 export default App;
-
-ReactDOM.render(<App />, document.getElementById('photos'));

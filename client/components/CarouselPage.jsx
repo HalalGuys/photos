@@ -37,6 +37,7 @@ const CarouselPage = props => (
       { props.count === 3 && <img alt="bedroom" id="Main" src={props.photos[0].bedroom.bedroom_url} /> }
     </div>
     <Carousel
+      class="slider overlay"
       title="Carousel"
       decrement = {props.decrementCount}
       increment={props.incrementCount}

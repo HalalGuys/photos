@@ -64,7 +64,7 @@ class Modal extends React.Component {
     };
 
     return (
-      <div {...ArrowKeysReact.events} tabIndex="1" className="backdrop" style={backdropStyle}>
+      <div {...ArrowKeysReact.events} className="backdrop" style={backdropStyle}>
         <div>
           <button
             type="button"

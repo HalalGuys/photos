@@ -1,3 +1,8 @@
+let mongoose = require('mongoose');
+
+const Property = require('./db.js').Property;
+
+
 const base = 'https://s3.amazonaws.com/fecphotobucket/';
 
 let random = Math.floor(Math.random() * 5) + 1;
@@ -41,5 +46,8 @@ for (let i = 1; i < 101; (i += 1)) {
   );
 }
 
-console.log('sam might not come dataGen......')
-module.exports = { storage };
+
+Property.insertMany(storage, function (error,res) {
+  if (error) throw error;
+  mongoose.connection.close();
+});
