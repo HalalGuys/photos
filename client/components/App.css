@@ -129,7 +129,8 @@ body, html {
     }
 
     .right {
-        left: 90% !important;
+        left: 88% !important;
+        padding-right: 25px !important;
     }
 
 }

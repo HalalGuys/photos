@@ -31,12 +31,13 @@ const CarouselPage = props => (
     className="wrapper"
   >
     <div>
-      { props.count === 0 && <img alt="kitchen" id="Main" src={props.photos[0].kitchen.kitchen_url} /> }
-      { props.count === 1 && <img alt="dining" id="Main" src={props.photos[0].dining.dining_url} /> }
-      { props.count === 2 && <img alt="bathroom" id="Main" src={props.photos[0].bathroom.bathroom_url} /> }
-      { props.count === 3 && <img alt="bedroom" id="Main" src={props.photos[0].bedroom.bedroom_url} /> }
+      { props.count === 0 && <img class="responsives" alt="kitchen" id="Main" src={props.photos[0].kitchen.kitchen_url} /> }
+      { props.count === 1 && <img class="responsives" alt="dining" id="Main" src={props.photos[0].dining.dining_url} /> }
+      { props.count === 2 && <img class="responsives" alt="bathroom" id="Main" src={props.photos[0].bathroom.bathroom_url} /> }
+      { props.count === 3 && <img class="responsives" alt="bedroom" id="Main" src={props.photos[0].bedroom.bedroom_url} /> }
     </div>
     <Carousel
+    positionFromModal={props.positionFromModal}
       class="slider overlay"
       title="Carousel"
       decrement = {props.decrementCount}
@@ -54,6 +55,7 @@ const CarouselPage = props => (
       <Item className="fixed">
         <img className="fixed" alt="" src={props.photos[0].bedroom.bedroom_url} />
       </Item>
+      
     </Carousel>
   </div>
 

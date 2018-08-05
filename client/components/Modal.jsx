@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './ModalStyles.css';
-import ArrowKeysReact from 'arrow-keys-react';
+
 
 
 class Modal extends React.Component {
@@ -12,6 +12,7 @@ class Modal extends React.Component {
 
 
   componentDidMount() {
+
     window.addEventListener('keyup', this.handleKeyUp, false);
   }
 
@@ -26,7 +27,7 @@ class Modal extends React.Component {
       27: () => {
         e.preventDefault();
         onCloseRequest();
-        window.removeEventListener('keyup', this.handleKeyUp, false);
+        
       },
     };
 
@@ -64,11 +65,13 @@ class Modal extends React.Component {
     };
 
     return (
-      <div {...ArrowKeysReact.events} className="backdrop" style={backdropStyle}>
+      <div className="backdrop" style={backdropStyle}>
         <div>
           <button
             type="button"
-            onClick ={this.props.increment} 
+            onClick ={()=> {
+              this.props.increment()
+            }} 
             className="rightChevron"
           >
             <i className="fas fa-chevron-right fa-6x" />
@@ -76,7 +79,9 @@ class Modal extends React.Component {
           <button
             type="button"
             className="leftChevron"
-            onClick={this.props.decrement}
+            onClick={() => {
+              this.props.decrement();
+            } }
           >
             <i className="fas fa-chevron-left fa-6x" />
           </button>
@@ -102,7 +107,7 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-  onClose: PropTypes.func.isRequired,
+  onCloseRequest: PropTypes.func.isRequired,
   show: PropTypes.bool,
   children: PropTypes.node
 };

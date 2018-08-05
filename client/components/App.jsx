@@ -14,11 +14,16 @@ class App extends Component {
       isOpen: false,
       showModal: false,
       count: 0,
-      position: 0,
-      direction: 'next',
-      sliding: false,
+      positionFromModal:667
 
     };
+
+
+    this.onChangePositionFromModal = position => {
+      this.setState({
+        positionFromModal: position
+      })
+    }
     this.getPhotos = this.getPhotos.bind(this);
     this.showCarousel = this.showCarousel.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -42,37 +47,7 @@ class App extends Component {
           counter: 1,
         }, () => console.log(that.state.photos));   
       });
-  }
-
-  nextSlide() {
-    console.log('nextslide invoked')
-    const { position } = this.state;
-    const { children } = this.props;
-    const numItems = children.length || 1;
-    this.doSliding('next', position === numItems - 1 ? 0 : position + 1);
-  }
-
-  prevSlide() {
-    const { position } = this.state
-    const { children } = this.props
-    const numItems = children.length
-    this.doSliding('prev', position === 0 ? numItems - 1 : position - 1);
-  }
-
-  doSliding(direction, position) {
-    const { sliding } = this.state;
-    console.log('dosliding is invoked');
-    this.setState({
-      sliding: true,
-      direction,
-      position,
-    });
-    setTimeout(() => {
-      this.setState({
-        sliding: false,
-      });
-    }, 50);
-  }
+    }
 
   incrementCount() {
     if (this.state.count === 3) {
@@ -104,6 +79,13 @@ class App extends Component {
     });
   }
 
+  closeModal() {
+    console.log('here in close modal', this.state.isOpen)
+    this.setState({
+      isOpen: false,
+    });
+  }
+
   showCarousel() {
     this.setState({
       counter: 2,
@@ -125,14 +107,15 @@ class App extends Component {
         { this.state.counter === 2 && <CarouselPage photos={this.state.photos} />}
         <div className="App">
           <Modal 
+            onChangePositionFromModal={this.onChangePositionFromModal}
             show={this.state.isOpen}
-            onClose={this.toggleModal}
-            onCloseRequest={() => this.toggleModal()}
+            onCloseRequest={() => this.closeModal()}
             count={this.state.count}
             increment={this.incrementCount}
             decrement={this.decrementCount}
           >
             <CarouselPage
+            positionFromModal={this.state.count}
               photos={this.state.photos}
               count={this.state.count}
               incrementCount={this.incrementCount}
