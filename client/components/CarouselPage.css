@@ -1,3 +1,22 @@
+@media only screen and (max-width: 804px) {
+    #Main {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+
+}
+
+@media only screen and (max-width: 418px) {
+    #Main {
+        width: 258px !important;
+        height: 134.38px !important;
+    }
+
+
+}
+
+
 .fixed {
     width: 100px;
     height: 67px;
@@ -8,3 +27,9 @@
     height: 438px;
 }
 
+
+
+.overlay {
+    visibility: hidden
+};
+  

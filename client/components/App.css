@@ -2,7 +2,10 @@
 body, html {
     height: 100%;
 }
-
+.photomargin {
+    margin-top: 5%;
+    display: block;
+}
 .container { 
     /* Full height */ 
 
@@ -17,7 +20,120 @@ body, html {
     height: 100%;
 }
 
+.container .btn {
+    position: absolute;
+    display: inline-block !important;
+    top: 14%;
+    left: 79%;
+    text-align: center !important;
+    text-decoration: none !important;
+    -webkit-transition-property: background, border-color, color !important;
+    -moz-transition-property: background, border-color, color !important;
+    transition-property: background, border-color, color !important;
+    width: auto !important;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: white;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    max-width: 100%;
+    letter-spacing: normal !important;
+    text-transform: undefined !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    font-weight: 600 !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    min-width: 51.77708763999664px !important;
+    box-shadow: none !important;
+    background: #ffffff ;
+    border-color: transparent !important;
+    color: #484848 !important;
+}
 
+.container .btns {
+    display: inline-block !important;
+    margin: 0px !important;
+    position: absolute !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    -webkit-transition-property: background, border-color, color !important;
+    -moz-transition-property: background, border-color, color !important;
+    transition-property: background, border-color, color !important;
+    width: auto !important;
+    top: 14%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: white;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    max-width: 100%;
+    letter-spacing: normal !important;
+    text-transform: undefined !important;
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    font-weight: 600 !important;
+    border-width: 1px !important;
+    border-style: solid !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    min-width: 51.77708763999664px !important;
+    box-shadow: none !important;
+    background: #ffffff ;
+    border-color: transparent !important;
+    color: #484848 !important;
+}
+
+.mobilebutton {
+    visibility: hidden;
+}
+.container .viewphotos {
+    position: absolute;
+    height: 36px;
+    width:155px;
+    top: 90%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    background-color: white;
+    color: rgb(27, 27, 27);
+    font-size: 14px;
+    line-height: 18px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 16px;
+    padding-left: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+@media only screen and (max-width: 900px) {
+    .desktopbutton {
+        visibility: hidden;
+    }
+    .mobilebutton {
+        background-color: transparent !important;
+        visibility: visible;
+    }
+
+    .right {
+        left: 88% !important;
+        padding-right: 25px !important;
+    }
+
+}
 
 .container {
     position: relative;
@@ -26,53 +142,6 @@ body, html {
     cursor: pointer;
 }
 
-
-.container .btn {
-    position: absolute;
-    top: 10%;
-    left: 78%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: white;
-    color: rgb(27, 27, 27);
-    font-size: 16px;
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    max-width: 100%;
-}
-
-.container .btns {
-    position: absolute;
-    top: 10%;
-    left: 90%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: white;
-    color: rgb(27, 27, 27);
-    font-size: 16px;
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    max-width: 100%;
-}
-
-.container .viewphotos {
-    position: absolute;
-    top: 90%;
-    left: 10%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: white;
-    color: rgb(27, 27, 27);
-    font-size: 16px;
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-}
 
 .container .btn:hover {
     background-color: grey;
