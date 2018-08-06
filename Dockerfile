@@ -8,8 +8,6 @@ COPY . /src/app
 
 RUN npm install
 
-RUN npm -g add nodemon
-
 EXPOSE 3002
 
 CMD [ "npm", "run", "start:dev" ]

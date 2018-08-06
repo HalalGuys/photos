@@ -29,6 +29,7 @@ class App extends Component {
     this.toggleModal = this.toggleModal.bind(this);
     this.incrementCount = this.incrementCount.bind(this);
     this.decrementCount = this.decrementCount.bind(this);
+    this.clickImage = this.clickImage.bind(this);
   }
 
   componentDidMount() {
@@ -41,16 +42,16 @@ class App extends Component {
     const index = getListingIdFromUrl();
     axios.get(`/api/listing/${index}`)
       .then((response) => {
-        console.log('got a response', response.data);
+        const res = response.data[0].photos;
         that.setState({
-          photos: response.data,
+          photos: res,
           counter: 1,
-        }, () => console.log(that.state.photos));   
+        }, () => console.log(that.state.photos.photos));
       });
-    }
+  }
 
   incrementCount() {
-    if (this.state.count === 3) {
+    if (this.state.count === (this.state.photos.length - 1)) {
       this.setState({
         count: 0,
       });
@@ -62,7 +63,7 @@ class App extends Component {
   decrementCount() {
     if (this.state.count === 0) {
       this.setState({
-        count: 3,
+        count: (this.state.photos.length - 1),
       });
     } else {
       this.setState({
@@ -92,6 +93,12 @@ class App extends Component {
     });
   }
 
+  clickImage(index) {
+    this.setState ({
+      count: index,
+    });
+  }
+
   render() {
     return (
       <div class="photomargin">
@@ -102,9 +109,8 @@ class App extends Component {
             <button class="btns mobilebutton"> <i class="heart far fa-heart fa-2x"></i> </button>
             <button class="btn mobilebutton"><i class="far fa-share-square fa-2x"></i></button>
             <button onClick={this.toggleModal} class="viewphotos right">View Photos</button>
-          <img class="responsive" src={this.state.photos[0].dining.dining_url} />
+          <img class="responsive" src={this.state.photos[0].url} />
         </div> }
-        { this.state.counter === 2 && <CarouselPage photos={this.state.photos} />}
         <div className="App">
           <Modal 
             onChangePositionFromModal={this.onChangePositionFromModal}
@@ -115,9 +121,10 @@ class App extends Component {
             decrement={this.decrementCount}
           >
             <CarouselPage
-            positionFromModal={this.state.count}
+              positionFromModal={this.state.count}
               photos={this.state.photos}
               count={this.state.count}
+              clickImage = {this.clickImage}
               incrementCount={this.incrementCount}
               decrementCount={this.decrementCount}
             />
