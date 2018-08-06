@@ -1,25 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import CarouselContainer from './CarouselContainer.jsx'
-import Wrapper from './Wrapper.jsx'
-import CarouselSlot from './CarouselSlot.jsx'
+import CarouselContainer from './CarouselContainer';
+import Wrapper from './Wrapper';
+import CarouselSlot from './CarouselSlot';
 import styles from './Carousel.css';
 
 class Carousel extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
 
-console.log('>>>>', props.positionFromModal)
-
     this.state = {
-      position: props.positionFromModal,
+      position: 0,
       direction: 'next',
-      sliding: false
+      sliding: false,
 
     };
-
-
 
     this.nextSlide = this.nextSlide.bind(this);
     this.getOrder = this.getOrder.bind(this);
@@ -104,7 +99,7 @@ console.log('>>>>', props.positionFromModal)
   render() {
     const { title, children } = this.props
     return (
-      <div id="myKey">
+      <div id="wrapper">
 
             <Wrapper>
               <CarouselContainer sliding = {this.state.sliding} direction= {this.state.direction} >
@@ -119,24 +114,26 @@ console.log('>>>>', props.positionFromModal)
                 )) }
               </CarouselContainer>
             </Wrapper>
-            <button onClick={ 
-              () => {
-                this.prevSlide() 
-                this.props.decrement()
-              }
-            }>
-              Prev
-            </button>
-            <button 
-            class = "check"
-            onClick={ 
-              () => {
-                this.nextSlide() 
-                this.props.increment() 
-              }
-            }>
-              Next
-            </button>
+
+          <div
+            className="left chev"
+            onClick={() => {
+              this.prevSlide();
+              this.props.decrement();
+            } }
+          >
+            <i className="fas fa-chevron-left fa-5x" />
+          </div>
+          <div
+            class= "right chev"
+            onClick ={()=> {
+              this.nextSlide();
+              this.props.increment()
+            }} 
+          >
+            <i className="fas fa-chevron-right fa-5x" />
+          </div>
+        
     </div>
   )
   }

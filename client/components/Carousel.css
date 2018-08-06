@@ -1,0 +1,71 @@
+.wrapper {
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.wrapper .left {
+    position: absolute;
+    bottom: 54%;
+    left: -28%;
+
+}
+
+.wrapper .right {
+    position: absolute;
+
+    bottom: 54%;
+    left: 128%;
+}
+@media only screen and (max-width: 1050px) {
+
+    .wrapper .right {
+      left: 106% !important;
+    }
+    .wrapper .left {
+        left: -24%;
+    }
+} 
+  
+@media only screen and (max-width: 900px) {
+  .wrapper .right {
+    left: 103% !important;
+  }
+  .wrapper .left {
+    left: -13%;
+  }
+
+
+}
+
+
+
+
+  @media only screen and (max-width: 600px) {
+
+    .wrapper .left {
+      left: -17%;
+    }
+  
+  
+  }
+  @media only screen and (max-width: 500px) {
+
+    .wrapper .left {
+      left: -21%;
+    }
+  
+  
+  }
+  @media only screen and (max-width: 425px) {
+
+    .wrapper .left {
+      left: -25%;
+    }
+  
+  
+  }
+.chev {
+    background-color: transparent;
+    color:white;
+    border: none;
+}

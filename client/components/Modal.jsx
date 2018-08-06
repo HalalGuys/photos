@@ -66,26 +66,6 @@ class Modal extends React.Component {
 
     return (
       <div className="backdrop" style={backdropStyle}>
-        <div>
-          <button
-            type="button"
-            onClick ={()=> {
-              this.props.increment()
-            }} 
-            className="rightChevron"
-          >
-            <i className="fas fa-chevron-right fa-6x" />
-          </button>
-          <button
-            type="button"
-            className="leftChevron"
-            onClick={() => {
-              this.props.decrement();
-            } }
-          >
-            <i className="fas fa-chevron-left fa-6x" />
-          </button>
-        </div>
         <div className="modal" style={modalStyle}>
           {this.props.children}
 

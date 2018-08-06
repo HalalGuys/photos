@@ -25,40 +25,37 @@ const Item = styled.div`
 //   vertical-align: middle;
 //   background-color: transparent;
 // `
-const CarouselPage = props => (
+const CarouselPage = props => {
+ 
+    return (
 
   <div
     className="wrapper"
   >
     <div>
-      { props.count === 0 && <img class="responsives" alt="kitchen" id="Main" src={props.photos[0].kitchen.kitchen_url} /> }
-      { props.count === 1 && <img class="responsives" alt="dining" id="Main" src={props.photos[0].dining.dining_url} /> }
-      { props.count === 2 && <img class="responsives" alt="bathroom" id="Main" src={props.photos[0].bathroom.bathroom_url} /> }
-      { props.count === 3 && <img class="responsives" alt="bedroom" id="Main" src={props.photos[0].bedroom.bedroom_url} /> }
+    <img class="responsives" alt={props.photos[props.count].content_type} id="Main" src={props.photos[props.count].url} />
+    <div class="description">
+      {`${props.count + 1}/${props.photos.length}:${props.photos[props.count].content_type}`}
+    </div>
     </div>
     <Carousel
-    positionFromModal={props.positionFromModal}
       class="slider overlay"
       title="Carousel"
       decrement = {props.decrementCount}
       increment={props.incrementCount}
     >
-      <Item class="fixed">
-        <img className="fixed" alt="" src={props.photos[0].kitchen.kitchen_url} />
-      </Item>
-      <Item className="fixed">
-        <img className="fixed" alt="" src={props.photos[0].dining.dining_url} />
-      </Item>
-      <Item className="fixed">
-        <img className="fixed" alt="" src={props.photos[0].bathroom.bathroom_url} />
-      </Item>
-      <Item className="fixed">
-        <img className="fixed" alt="" src={props.photos[0].bedroom.bedroom_url} />
-      </Item>
+      {
+        props.photos.map((photo,index) =>
+        <Item key={index} onClick={() => props.clickImage(index)} class="fixed">
+          <img className="fixed opacity" alt={photo.content_type} src={photo.url} />
+        </Item>
+      )
+      }
       
     </Carousel>
   </div>
 
 );
+};
 
 export default CarouselPage;
